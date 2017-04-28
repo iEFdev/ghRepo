@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+#
+# /usr/local/xbin/ghRepo
+#
+# ------------------------------------------------------------
+#
+# Author:       iEFdev, 2017-04-28
+# Description:  A script to init a repository on Github
+#               from the command line.
+# Usage:        $ ghRepo
+#
+#               ...or copy both functions and add to your:
+#                ~/.bash_git file.
+#
+
+function ghConfig()
+{
+    local c="${1}";
+    echo -e "\n:: Your Github ${c} is missing in your config file(s)";
+    [[ "${c}" == token ]] && cat << INFO
+
+    # To generate an access token, visit: <https://github.com/settings/tokens>
+    # Token description: ghRepo
+
+INFO
+    read -p "»» Add this to global config (Y/n)? " gh_config;
+    [[ -z ${gh_config} || ${gh_config} =~ (Y|y) ]] && g=' --global';
+    read -p "»» Enter your Github ${c}: " c_value;
+    git config${g} github.${c} ${c_value};
+}
+
+function ghRepo()
+{
+    ERR=$?
+    gh_repo_name="$1";
+    local_dir=`basename $(pwd)`;
+    gh_username=`git config github.username`;
+    gh_token=`git config github.token`
+
+    # Get name & description
+    [ -z "${gh_repo_name}" ] && \
+    read -p "»» Repo name (leave empty for '${local_dir}'): " gh_repo_name;
+    [ -z "${gh_repo_name}" ] && gh_repo_name=${local_dir};
+    read -p "»» Add a short description: " gh_repo_desc;
+ 
+    # Check username/token, and reload if missing
+    [ -z ${gh_username} ] && \
+    ghConfig username && gh_username=`git config github.username`;
+    [ -z ${gh_token} ] && \
+    ghConfig token && gh_token=`git config github.token`;
+
+    echo -e "\n»» Creating Github repository: ${gh_repo_name}";
+    curl -i -H "Authorization: token ${gh_token}" -d \
+    '{"name":"'"${gh_repo_name}"'","description":"'"${gh_repo_desc}"'","has_wiki":false}' \
+    https://api.github.com/user/repos > /dev/null 2>&1;
+    git remote add origin \
+    git@github.com:${gh_username}/${gh_repo_name}.git > /dev/null 2>&1;
+    git remote -v;
+    echo -e ":: Done\n";
+
+    echo "»» Pushing code to Github"
+    git push -u origin master > /dev/null 2>&1;
+    echo -e ":: Done\n";
+
+    cat << INFO
+-----
+
+    [!] You should branch off to 'devel', and work from there...
+
+    $ git checkout -b devel
+
+INFO
+
+return ${ERR};
+}
+
+ghRepo;
