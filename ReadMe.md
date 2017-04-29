@@ -11,13 +11,12 @@ Install it to `/usr/local/bin`, or in another location. Just make sure it's adde
 	sudo install -bv -m755 -o0 -g0 ghRepo /usr/local/bin
 
 ## Preparations
-To be able to use the script you'll need to set up an “access token”. You can go and create one at Github ([here][token_url]), and paste the string when you run the script _(see example out below)_. Or add it your self with `git config`.
+To be able to use the script you'll need to set up an “access token”. You can go and create one at Github ([here][token_url]), and paste the string when you run the script _(see first “example output” below)_. Or add it your self with `git config`.
 
 ```bash
 git config --global github.username YOUR_USER_NAME
 git config --global github.token *** TOKEN ***
 ```
-
 
 ## Usage
 
