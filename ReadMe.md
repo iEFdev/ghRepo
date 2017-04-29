@@ -8,7 +8,16 @@
 
 Install it to `/usr/local/bin`, or in another location. Just make sure it's added to PATH.
 
-	sudo install -bv -m755 -o0 -g0 <file> /usr/local/bin
+	sudo install -bv -m755 -o0 -g0 ghRepo /usr/local/bin
+
+## Preparations
+To be able to use the script you'll need to set up an “access token”. You can go and create one at Github ([here][token_url]), and paste the string when you run the script _(see example out below)_. Or add it your self with `git config`.
+
+```bash
+git config --global github.username YOUR_USER_NAME
+git config --global github.token *** TOKEN ***
+```
+
 
 ## Usage
 
@@ -20,6 +29,9 @@ Or copy the 2 functions and put in your `~/.bash_git` _(or `~/.bashrc` etc)_.
 
 ```bash
 $ cd /path/to/MyScript
+$ git init && git add . && git commit -m "Initial commit"
+```
+```bash
 $ ghRepo
 »» Repo name (leave empty for 'MyScript'):
 »» Add a short description: This is my new fooBar script.
@@ -55,7 +67,6 @@ origin	git@github.com:YOUR_USER_NAME/MyScript.git (push)
 If your Github _username_ and _token_ are already in `.gitconfig`:
 
 ```bash
-$ cd /path/to/MyScript
 $ ghRepo
 »» Repo name (leave empty for 'MyScript'):
 »» Add a short description: This is my new fooBar script
@@ -94,3 +105,4 @@ The script was made and inspired from these pages/posts...
 
 <!-- Markdown link & img dfn's -->
 [license]: https://img.shields.io/badge/License-WTFPL-778899.svg?style=plastic
+[token_url]: https://github.com/settings/tokens
