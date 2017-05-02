@@ -14,6 +14,7 @@ Install it to `/usr/local/bin`, or in another location. Just make sure it's adde
 To be able to use the script you'll need to set up an “access token”. You can go and create one at Github [here][token_url]:
 
 ![''][ghToken]
+
 _Check the **repo** or **puplic_repo**._
 
 …and paste the string when you run the script _(see first “example output” below)_. Or add it your self with `git config`.
