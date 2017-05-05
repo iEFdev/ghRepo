@@ -53,7 +53,7 @@ $ ghRepo
 »» Add this to global config (Y/n)?
 »» Enter your Github token: *** TOKEN ***
 
-»» Creating Github repository: current_folder
+»» Creating Github repository: MyScript
 origin	git@github.com:YOUR_USER_NAME/MyScript.git (fetch)
 origin	git@github.com:YOUR_USER_NAME/MyScript.git (push)
 :: Done
@@ -76,7 +76,7 @@ $ ghRepo
 »» Repo name (leave empty for 'MyScript'):
 »» Add a short description: This is my new fooBar script
 
-»» Creating Github repository: ghRepo
+»» Creating Github repository: MyScript
 origin	git@github.com:YOUR_USER_NAME/MyScript.git (fetch)
 origin	git@github.com:YOUR_USER_NAME/MyScript.git (push)
 :: Done
