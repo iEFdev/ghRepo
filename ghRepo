@@ -1,16 +1,18 @@
 #!/usr/bin/env bash
 #
-# /usr/local/xbin/ghRepo
+# /usr/local/bin/ghRepo
 #
-# ------------------------------------------------------------
 #
-# Author:       iEFdev, 2017-04-28
+# Author:       iEFdev, 2018-06-13
 # Description:  A script to init a repository on Github
 #               from the command line.
+#
 # Usage:        $ ghRepo
 #
 #               ...or copy both functions and add to your:
 #                ~/.bash_git file.
+#
+# ------------------------------------------------------------
 #
 
 function ghConfig()
@@ -42,7 +44,7 @@ function ghRepo()
     read -p "»» Repo name (leave empty for '${local_dir}'): " gh_repo_name;
     [ -z "${gh_repo_name}" ] && gh_repo_name=${local_dir};
     read -p "»» Add a short description: " gh_repo_desc;
- 
+
     # Check username/token, and reload if missing
     [ -z ${gh_username} ] && \
     ghConfig username && gh_username=`git config github.username`;
